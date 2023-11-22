@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from flask_restx import Api, Resource
 from ai_model import AIModel
 
@@ -14,5 +14,6 @@ class Predict(Resource):
     def post(self):
         data = request.json.get('data')
         temp = AIModel().predict(data)
+        temp = jsonify(temp)
         return temp
 
