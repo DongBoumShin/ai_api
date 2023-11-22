@@ -1,0 +1,18 @@
+[uwsgi]
+chdir = /srv/grad_project/
+module = backend.wsgi:application
+home = /home/ubuntu/django_venv/
+
+uid = ubuntu
+gid = ubuntu
+
+socket = /tmp/grad_project.sock
+chmod-socket = 666
+chown-socket = ubuntu:ubuntu
+
+enable-threads = true
+master = true
+vacuum = true
+pidfile = /tmp/mysite.pid
+logto = /var/log/uwsgi/mysite/@(exec://date +%%Y-%%m-%%d).log
+log-reopen = true
