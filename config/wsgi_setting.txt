@@ -1,6 +1,6 @@
 [uwsgi]
-chdir = /srv/grad_project/
-module = ai_api.wsgi:application
+chdir = /srv/grad_project/ai_api/
+module = wsgi:application
 home = /home/ubuntu/flask_venv/
 
 uid = ubuntu
