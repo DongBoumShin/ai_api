@@ -3,7 +3,7 @@ Description=uWSGI service
 After=syslog.target
 
 [Service]
-ExecStart=/home/ubuntu/django_venv/bin/uwsgi -i /srv/grad_project/backend/config/wsgi_setting.ini
+ExecStart=/home/ubuntu/flask_venv/bin/uwsgi -i /srv/grad_project/ai_api/config/wsgi_setting.ini
 
 Restart=always
 KillSignal=SIGQUIT
