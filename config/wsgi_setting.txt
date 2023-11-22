@@ -1,7 +1,7 @@
 [uwsgi]
 chdir = /srv/grad_project/
 module = backend.wsgi:application
-home = /home/ubuntu/django_venv/
+home = /home/ubuntu/flask_venv/
 
 uid = ubuntu
 gid = ubuntu
