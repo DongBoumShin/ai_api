@@ -33,7 +33,7 @@ class AIModel:
     def predict(self, img):
         mtcnn = MTCNN()
 
-        frame = cv2.imread(img)
+        frame = cv2.imdecode(np.frombuffer(img, dtype=np.uint8), cv2.IMREAD_UNCHANGED)
         transform = transforms.Compose([
             np.float32,
             transforms.ToTensor(),
