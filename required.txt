@@ -1,0 +1,6 @@
+torch, torchvision
+facenet-pytorch
+numpy
+opencv2
+Flask
+Flask_restx
