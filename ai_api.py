@@ -16,7 +16,7 @@ class Predict(Resource):
         return {'hello': 'world'}
 
     def post(self):
-        img = BytesIO(b64decode(request.json['image']))
+        img = BytesIO(b64decode(request.json['image'])).read()
         temp = AIModel().predict(img)
         #temp = {'age':'obs', 'gender':'women', 'emotion':'angry'}
         temp = jsonify(temp)
