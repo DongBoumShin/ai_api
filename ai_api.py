@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, make_response
 from flask_restx import Api, Resource
 from ai_model import AIModel
 from flask_cors import CORS
@@ -19,5 +19,8 @@ class Predict(Resource):
         #temp = AIModel().predict(img)
         temp = {'age':'obs', 'gender':'women', 'emotion':'angry'}
         temp = jsonify(temp)
-        return temp
+        # Create a response with the entire JSON string and close the connection
+        response = make_response(temp)
+        response.headers['Content-Length'] = len(response.data)
+        return response
 
