@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 from flask_restx import Api, Resource
 from ai_model import AIModel
 from flask_cors import CORS
+from io import BytesIO
 
 app = Flask(__name__)
 CORS(app)
@@ -14,8 +15,8 @@ class Predict(Resource):
         return {'hello': 'world'}
 
     def post(self):
-        data = request.files['image'].read()
-        temp = AIModel().predict(data)
+        img = BytesIO(request.files['image'].read())
+        temp = AIModel().predict(img)
         temp = jsonify(temp)
         return temp
 

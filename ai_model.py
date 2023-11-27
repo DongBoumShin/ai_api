@@ -6,6 +6,7 @@ from torchvision import transforms
 import numpy as np
 import cv2
 
+
 class AIModel:
     def __init__(self):
         self.dict_age = {0: 'tens', 1: 'ybs', 2: 'obs', 3: 'old'}
@@ -28,10 +29,10 @@ class AIModel:
         self.googlenet_emotion.eval()
 
 
-    def predict(self, data):
+    def predict(self, img):
         mtcnn = MTCNN()
 
-        frame = cv2.imread(data['image'])
+        frame = cv2.imread(img)
         transform = transforms.Compose([
             np.float32,
             transforms.ToTensor(),
