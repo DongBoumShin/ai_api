@@ -61,7 +61,7 @@ class AIModel:
             _, predicted_emotion = torch.max(output_emotion, 1)
             #default value
             age = gender = emotion = -1
-            
+
             age = predicted_age.item()
             gender = predicted_gender.item()
             emotion = predicted_emotion.item()
