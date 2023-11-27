@@ -9,9 +9,10 @@ import cv2
 
 class AIModel:
     def __init__(self):
-        self.dict_age = {0: 'tens', 1: 'ybs', 2: 'obs', 3: 'old'}
-        self.dict_gender = {0: 'women', 1: 'men'}
-        self.dict_emotion = {0: 'angry', 1: 'disgusting', 2: 'fear', 3: 'happy', 4: 'neutral', 5: 'sad', 6: 'surprised'}
+        self.dict_age = {-1: 'unknown', 0: 'tens', 1: 'ybs', 2: 'obs', 3: 'old'}
+        self.dict_gender = {-1: 'unknown', 0: 'women', 1: 'men'}
+        self.dict_emotion = {-1: 'unknown', 0: 'angry', 1: 'disgusting', 2: 'fear',
+                             3: 'happy', 4: 'neutral', 5: 'sad', 6: 'surprised'}
 
         self.googlenet_age = models.googlenet(pretrained=True)
         model_path = 'age_googlenet_korean_cross_entropy_v2.pth'
@@ -41,7 +42,7 @@ class AIModel:
         ])
         boxes, _ = mtcnn.detect(frame)
         if boxes is None:  # 얼굴을 찾은 경우만 예측
-            return {'gender': "no face", 'age': "no face", 'emotion': "no face"}
+            return {'gender': 'unknown', 'age': 'unknown', 'emotion': 'unknown'}
         for box in boxes:
             cv2.rectangle(frame, (int(box[0]), int(box[1])), (int(box[2]), int(box[3])), (0, 0, 255), 2)
 
@@ -58,7 +59,9 @@ class AIModel:
             _, predicted_age = torch.max(output_age, 1)
             _, predicted_gender = torch.max(output_gender, 1)
             _, predicted_emotion = torch.max(output_emotion, 1)
-
+            #default value
+            age = gender = emotion = -1
+            
             age = predicted_age.item()
             gender = predicted_gender.item()
             emotion = predicted_emotion.item()

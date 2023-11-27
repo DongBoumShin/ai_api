@@ -17,8 +17,8 @@ class Predict(Resource):
 
     def post(self):
         img = BytesIO(b64decode(request.json['image']))
-        #temp = AIModel().predict(img)
-        temp = {'age':'obs', 'gender':'women', 'emotion':'angry'}
+        temp = AIModel().predict(img)
+        #temp = {'age':'obs', 'gender':'women', 'emotion':'angry'}
         temp = jsonify(temp)
         # Create a response with the entire JSON string and close the connection
         return temp
